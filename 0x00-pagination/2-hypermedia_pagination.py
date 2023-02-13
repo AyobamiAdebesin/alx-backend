@@ -53,7 +53,7 @@ class Server:
         """
         data = self.get_page(page, page_size)
         total_pages = len(self.dataset()) // page_size + 1
-        return_dict = {
+        set_info = {
                 "page_size": page_size
                 "page": page,
                 "data": data,
@@ -61,3 +61,4 @@ class Server:
                 "prev_page": page - 1 if page > 1 else None,
                 "total_pages": total_pages
                 }
+        return set_info
