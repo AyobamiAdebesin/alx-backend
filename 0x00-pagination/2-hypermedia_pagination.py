@@ -58,7 +58,7 @@ class Server:
         except IndexError:
             next_page = None
         try:
-            prev_page  = page - 1
+            prev_page = page - 1
             self.get_page(prev_page, page_size)
         except AssertionError:
             prev_page = None
@@ -67,7 +67,7 @@ class Server:
                 "page_size": len(page_dataset),
                 "page": page,
                 "data": page_dataset,
-                "next_page": next_page
-                "prev_page": prev_page 
+                "next_page": next_page,
+                "prev_page": prev_page,
                 "total_pages": total_pages
                 }
