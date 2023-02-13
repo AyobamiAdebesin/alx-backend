@@ -34,8 +34,12 @@ class Server:
             self.__dataset = dataset[1:]
         return self.__dataset
 
-    def get_page(self, page: int, page_size: int = 10) -> List[List]:
-        assert int > 0 and page_size > 0, "page and page_size \
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+        Get the paginated pages from the dataset using index_range
+        helper function
+        """
+        assert page > 0 and page_size > 0, "page and page_size \
                 must be greater then zero"
         start_idx, end_idx = index_range(page, page_size)
         if end_idx > len(self.dataset()):
