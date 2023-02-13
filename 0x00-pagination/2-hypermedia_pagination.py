@@ -62,7 +62,7 @@ class Server:
             self.get_page(prev_page, page_size)
         except AssertionError:
             prev_page = None
-        total_pages = len(self.dataset) / page_size
+        total_pages = len(self.dataset()) / page_size
         return_dict = {
                 "page_size": len(page_dataset),
                 "page": page,
