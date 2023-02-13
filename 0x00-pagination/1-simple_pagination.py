@@ -39,8 +39,8 @@ class Server:
         Get the paginated pages from the dataset using index_range
         helper function
         """
-        assert page > 0
-        assert page_size > 0
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
         start_idx, end_idx = index_range(page, page_size)
         if end_idx > len(self.dataset()):
             return []
