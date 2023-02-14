@@ -7,7 +7,7 @@ class BasicCache(BaseCaching):
     """ Inherits from BasicCaching """
     def __init__(self):
         """ Initializes"""
-        BaseCaching..__init__(self)
+        BaseCaching.__init__(self)
 
     def put(self, key, item):
         """ Add an item to the cache """
