@@ -10,15 +10,15 @@ class FIFOCache(BaseCaching):
         """ Initializes """
         BaseCaching.__init__(self)
 
-    def put(self, key, value):
+    def put(self, key, item):
         """ Store data inside the cache """
-        if key is None and key not in self.cache_data.keys():
+        if key is None or item is None:
             pass
-        if len(self.cache_data.values()) > BaseCaching.MAX_ITEMS:
+        if len(self.cache_data.keys()) >= BaseCaching.MAX_ITEMS:
             temp = list(self.cache_data.keys())[0]
             del self.cache_data[temp]
             print("DISCARD: {}".format(temp))
-        self.cache_data[key] = value
+        self.cache_data[key] = item
 
     def get(self, key):
         """ Get data from the cache """
