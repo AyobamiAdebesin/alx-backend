@@ -18,7 +18,7 @@ class LRUCache(BaseCaching):
                 if key in self.cache_data:
                     self.cache_data[key] = item
                 else:
-                    self.cache_data[key] = value
+                    self.cache_data[key] = item
                     self.cache_data.move_to_end(key)
             elif cache_len >= BaseCaching.MAX_ITEMS:
                 if key in self.cache_data:
