@@ -26,6 +26,8 @@ class LRUCache(BaseCaching):
                     temp = self.cache_data.popitem(last=False)
                     print("DISCARD: {}".format(temp))
                     self.cache_data[key] = item
+        else:
+            pass
 
     def get(self, key):
         """ Get items from the cache """
