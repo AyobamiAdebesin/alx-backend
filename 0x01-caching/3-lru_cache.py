@@ -11,7 +11,7 @@ class LRUCache(BaseCaching):
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """Store an item in the cache.
+        """Adds an item in the cache.
         """
         if key is None or item is None:
             return
