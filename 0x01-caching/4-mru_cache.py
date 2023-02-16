@@ -13,8 +13,8 @@ class MRUCache(BaseCaching):
 
     def put(self, key, item):
         """ Store data into the cache """
-        if key is None and item is None:
-            pass
+        if key is None or item is None:
+            return None
         cache_len = len(self.cache_data)
         if key not in self.cache_data and cache_len >= BaseCaching.MAX_ITEMS:
             temp, _ = self.cache_data.popitem(False)
