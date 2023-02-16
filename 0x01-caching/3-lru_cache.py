@@ -19,10 +19,10 @@ class LRUCache(BaseCaching):
                     self.cache_data[key] = item
                 else:
                     self.cache_data[key] = item
-                    self.cache_data.move_to_end(key)
+                    self.cache_data.move_to_end(key, last=False)
             elif cache_len >= BaseCaching.MAX_ITEMS:
                 if key in self.cache_data:
-                    self.cache_data.move_to_end(key)
+                    self.cache_data[key] = item
                 else:
                     temp = self.cache_data.popitem(last=False)
                     print("DISCARD: {}".format(temp))
