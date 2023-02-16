@@ -1,42 +1,36 @@
 #!/usr/bin/env python3
 """ Least Recently Used (LRU) Caching """
 from base_caching import BaseCaching
+from collections import OrderedDict
 
 
 class LRUCache(BaseCaching):
-    """
-    LRUCache defines a Least Recently Used caching system
-    """
+    """ Least Recently Used Caching """
     def __init__(self):
-        """
-        Initialize the class with the parent's init method
-        """
-        super().__init__()
-        self.usage = []
+        """ Initializes """
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """
-        Cache a key-value pair
-        """
-        if key is None or item is None:
-            pass
-        else:
-            length = len(self.cache_data)
-            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
-                print("DISCARD: {}".format(self.usage[0]))
-                del self.cache_data[self.usage[0]]
-                del self.usage[0]
-            if key in self.usage:
-                del self.usage[self.usage.index(key)]
-            self.usage.append(key)
-            self.cache_data[key] = item
+        """ Store data into the cache """
+        cache_len = len(self.cache_data)
+        if key is not None and item is not None:
+            if cache_len < BaseCaching.MAX_ITEMS:
+                if key in self.cache_data:
+                    self.cache_data.move_to_end(key)
+                else:
+                    self.cache_data[key] = value
+            elif cache_len >= BaseCaching.MAX_ITEMS:
+                if key in self.cache_data:
+                    self.cache_data.move_to_end(key)
+                else:
+                    temp = self.cache_data.popitem(last=False)
+                    print("DISCARD: {}".format(temp))
+                    self.cache_data[key] = item
 
     def get(self, key):
-        """
-        Return the value linked to a given key, or None
-        """
-        if key is not None and key in self.cache_data.keys():
-            del self.usage[self.usage.index(key)]
-            self.usage.append(key)
-            return self.cache_data[key]
-        return None
+        """ Get items from the cache """
+        if key is not None and key in self.cache_data:
+            self.cache_data.move_to_end(last=False)
+            return self.cache_data
+        else:
+            return None
