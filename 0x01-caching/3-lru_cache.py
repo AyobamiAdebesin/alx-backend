@@ -15,6 +15,11 @@ class LRUCache(BaseCaching):
         """
         if key is None or item is None:
             return
+        # If key is not present and max capacity is not full
+        # set the key-value pair and move to the right.
+        # If key is not present and max capacity is full
+        # remove the rightmost value in the dict, set the key-value
+        # pair and move the the front of the dict
         if key not in self.cache_data:
             if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
                 temp, _ = self.cache_data.popitem(True)
@@ -25,8 +30,9 @@ class LRUCache(BaseCaching):
             self.cache_data[key] = item
 
     def get(self, key):
-        """Retrieves an item by key.
-        """
+        """Retrieves an item by key."""
+        # If key is present, move it to the front of the dict
+        # and return the value
         if key is not None and key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
         return self.cache_data.get(key, None)
