@@ -11,30 +11,22 @@ class LRUCache(BaseCaching):
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """ Store data into the cache """
-        cache_len = len(self.cache_data)
-        if key is not None and item is not None:
-            if cache_len < BaseCaching.MAX_ITEMS:
-                if key in self.cache_data:
-                    self.cache_data[key] = item
-                else:
-                    self.cache_data[key] = item
-                    self.cache_data.move_to_end(key, last=False)
-            elif cache_len >= BaseCaching.MAX_ITEMS:
-                if key in self.cache_data:
-                    self.cache_data[key] = item
-                else:
-                    temp = self.cache_data.popitem(last=False)
-                    print("DISCARD: {}".format(temp))
-                    self.cache_data[key] = item
-                    self.cache_data.move_to_end(key)
+        """Adds an item in the cache.
+        """
+        if key is None or item is None:
+            return
+        if key not in self.cache_data:
+            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
+                lru_key, _ = self.cache_data.popitem(True)
+                print("DISCARD:", lru_key)
+            self.cache_data[key] = item
+            self.cache_data.move_to_end(key, last=False)
         else:
-            pass
+            self.cache_data[key] = item
 
     def get(self, key):
-        """ Get items from the cache """
+        """Retrieves an item by key.
+        """
         if key is not None and key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
-            return self.cache_data
-        else:
-            return None
+        return self.cache_data.get(key, None)
