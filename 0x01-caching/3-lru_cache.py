@@ -5,7 +5,24 @@ from collections import OrderedDict
 
 
 class LRUCache(BaseCaching):
-    """ Least Recently Used Caching """
+    """
+    Least Recently Used Caching
+
+    get(self, key):  takes a key argument and
+    returns the corresponding value if it is
+    present in the cache. If the key is found,
+    the item is moved to the FRONT of the ordered
+    dictionary to indicate that it has been recently used
+
+    put(self, key, value): takes a key and value. If
+    the key is not present and the cache is not full,
+    add the key-value pair to the dict and move it to
+    the FRONT of the dict to indicate that it has been recently
+    used.
+    If key is not present and cache is full, pop the last element
+    i.e the element at the BACK out of the dict and set the new
+    key value pair and move it to the FRONT of the dict.
+    """
     def __init__(self):
         """ Initializes """
         self.cache_data = OrderedDict()
@@ -19,7 +36,7 @@ class LRUCache(BaseCaching):
         # set the key-value pair and move to the right.
         # If key is not present and max capacity is full
         # remove the rightmost value in the dict, set the key-value
-        # pair and move the the front of the dict
+        # pair and move to the front of the dict
         if key not in self.cache_data:
             if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
                 temp, _ = self.cache_data.popitem(True)
