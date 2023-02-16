@@ -9,7 +9,6 @@ class MRUCache(BaseCaching):
     """ Defines a Most Recently Used Algorithm """
     def __init__(self):
         """ Initializes """
-        super.__init__(self)
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
@@ -29,4 +28,4 @@ class MRUCache(BaseCaching):
         """ Get data from the cache """
         if key is not None and key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
-        return self.cache_data[key]
+        return self.cache_data.get(key, None)
