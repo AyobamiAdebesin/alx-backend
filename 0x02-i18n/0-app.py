@@ -2,10 +2,7 @@
 """ A basic Flask app """
 from flask import Flask
 from flask import render_template
-from flask_babel import Babel
-
 app = Flask(__name__)
-babel = Babel(app, default_locale='en', default_timezone='UTC')
 
 
 @app.route("/", strict_slashes=False)
