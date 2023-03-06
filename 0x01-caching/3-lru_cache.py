@@ -48,8 +48,8 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """Retrieves an item by key."""
-        # If key is present, move it to the front of the dict
-        # and return the value
+        # If key is present, move it to the front(extreme left hand side)
+        #  of the dict and return the value
         if key is not None and key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
         return self.cache_data.get(key, None)
